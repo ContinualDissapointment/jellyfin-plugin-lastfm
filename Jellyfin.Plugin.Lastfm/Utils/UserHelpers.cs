@@ -1,6 +1,6 @@
 ﻿namespace Jellyfin.Plugin.Lastfm.Utils
 {
-    using Jellyfin.Database.Implementations.Entities;
+    using Jellyfin.Data.Entities;
     using Models;
     using System;
     using System.Linq;

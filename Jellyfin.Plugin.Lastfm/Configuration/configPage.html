@@ -12,6 +12,15 @@
         <div data-role="content">
             <div class="content-primary">
                 <form id="LastfmScrobblerConfigurationForm">
+                    <h2>API Credentials</h2>
+                    <p>Register your own API key at <a href="https://www.last.fm/api/account/create" target="_blank">last.fm/api/account/create</a>.</p>
+                    <div class="inputContainer">
+                        <input is="emby-input" id="apiKey" name="apiKey" type="text" label="API Key:" />
+                    </div>
+                    <div class="inputContainer">
+                        <input is="emby-input" id="apiSecret" name="apiSecret" type="text" label="API Secret:" />
+                    </div>
+                    <h2>User Settings</h2>
                     <div class="selectContainer">
                         <select is="emby-select" id="user" name="user" label="Configure Last.fm for:"></select>
                     </div>
@@ -92,6 +101,8 @@
                 loadConfiguration: function () {
                     return ApiClient.getPluginConfiguration(this._pluginUniqueId).then($.proxy(function (config) {
                         this._config = config;
+                        this.$el.find('#apiKey').val(config.ApiKey || '');
+                        this.$el.find('#apiSecret').val(config.ApiSecret || '');
                     }, this));
                 },
 
@@ -229,9 +240,13 @@
 
                     var username = $(this).find("#username").val();
                     var password = $(this).find("#password").val();
+                    var apiKey = $(this).find("#apiKey").val();
+                    var apiSecret = $(this).find("#apiSecret").val();
 
                     //Load the config again in case another user has updated their Lastfm info
                     self.loadConfiguration().then(function () {
+                        self._config.ApiKey = apiKey;
+                        self._config.ApiSecret = apiSecret;
                         self.save(username, password);
                     });
                 },

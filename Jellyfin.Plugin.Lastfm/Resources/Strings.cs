@@ -21,8 +21,23 @@
 
         public static class Keys
         {
-            public static string LastfmApiKey     = "LASTFM_API_KEY_REMOVED";
-            public static string LastfmApiSeceret = "LASTFM_API_SECRET_REMOVED";
+            public static string LastfmApiKey
+            {
+                get
+                {
+                    var key = Plugin.Instance?.PluginConfiguration?.ApiKey;
+                    return string.IsNullOrWhiteSpace(key) ? "LASTFM_API_KEY_REMOVED" : key;
+                }
+            }
+
+            public static string LastfmApiSeceret
+            {
+                get
+                {
+                    var secret = Plugin.Instance?.PluginConfiguration?.ApiSecret;
+                    return string.IsNullOrWhiteSpace(secret) ? "LASTFM_API_SECRET_REMOVED" : secret;
+                }
+            }
         }
     }
 }

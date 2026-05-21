@@ -8,13 +8,14 @@
     /// </summary>
     public class PluginConfiguration : BasePluginConfiguration
     {
+        public string ApiKey { get; set; }
+        public string ApiSecret { get; set; }
         public LastfmUser[] LastfmUsers { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PluginConfiguration" /> class.
-        /// </summary>
         public PluginConfiguration()
         {
+            ApiKey = string.Empty;
+            ApiSecret = string.Empty;
             LastfmUsers = new LastfmUser[] { };
         }
     }
